@@ -1,0 +1,34 @@
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+/* Perspective Utilities */
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.rotate-y-10-neg {
+  transform: rotateY(-10deg);
+}
+
+.rotate-x-10 {
+  transform: rotateX(10deg);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
