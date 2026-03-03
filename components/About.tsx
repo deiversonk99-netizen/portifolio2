@@ -8,14 +8,14 @@ export const About: React.FC = () => {
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 dark:opacity-5"></div>
 
             <div className="container mx-auto px-6 relative z-10">
-                <div className="max-w-4xl mx-auto glass-light dark:glass-dark p-8 md:p-12 rounded-3xl shadow-xl border border-white/50 dark:border-gray-800">
+                <div className="max-w-4xl mx-auto bg-[#1a2c4e]/80 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-blue-500/20">
                     <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
                         <div className="relative">
                             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-blue-500 via-cyan-400 to-blue-600">
-                                <img src="https://picsum.photos/300/300" alt="Profile" className="w-full h-full rounded-full object-cover border-4 border-white" />
+                                <img src="https://picsum.photos/300/300" alt="Profile" className="w-full h-full rounded-full object-cover border-4 border-[#1a2c4e]" />
                             </div>
-                            <div className="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-lg">
-                                <Rocket className="text-blue-600" size={24} />
+                            <div className="absolute -bottom-2 -right-2 bg-blue-600 p-2 rounded-full shadow-lg">
+                                <Rocket className="text-white" size={24} />
                             </div>
                         </div>
 
@@ -23,8 +23,8 @@ export const About: React.FC = () => {
                             <div className="inline-block px-3 py-1 bg-blue-100/10 text-blue-400 rounded-full text-xs font-bold mb-3 uppercase tracking-wider border border-blue-500/20">
                                 O Especialista
                             </div>
-                            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-                                Construindo pontes entre o <span className="text-blue-600">caos</span> e a <span className="text-cyan-500">eficiência</span>
+                            <h2 className="text-3xl font-bold mb-4 text-white">
+                                Construindo pontes entre o <span className="text-blue-400">caos</span> e a <span className="text-cyan-400">eficiência</span>
                             </h2>
                             <div className="space-y-4 text-gray-700 dark:text-gray-300">
                                 <p>
