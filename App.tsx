@@ -8,14 +8,6 @@ import { InteractiveExperience } from './components/InteractiveExperience';
 import { Contact } from './components/Contact';
 
 function App() {
-  const [isFeedbackEnabled, setIsFeedbackEnabled] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true);
-
-  // Simple toggle for the admin panel
-  const handleAdminCheck = () => {
-    setIsAdmin(!isAdmin);
-  };
-
   return (
     <div className="font-sans text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-950 transition-colors duration-300 overflow-x-hidden selection:bg-blue-200 dark:selection:bg-blue-900">
       <Navbar />
@@ -25,44 +17,13 @@ function App() {
         <AppShowcase />
         <InteractiveExperience />
 
-        {/* Admin Feedback Toggle (Floating or hidden) */}
-        {isAdmin && (
-          <div className="fixed bottom-4 left-4 z-[99] bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-2xl border-2 border-blue-500 animate-in slide-in-from-bottom-10">
-            <div className="flex justify-between items-center mb-4">
-              <p className="text-xs font-bold text-gray-500 uppercase">Painel Admin</p>
-              <button
-                onClick={() => setIsAdmin(false)}
-                className="text-gray-400 hover:text-red-500 transition-colors p-1"
-                title="Fechar Painel"
-              >
-                <span className="text-lg font-bold">×</span>
-              </button>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium">Coletar Feedbacks:</span>
-              <button
-                onClick={() => setIsFeedbackEnabled(!isFeedbackEnabled)}
-                className={`w-12 h-6 rounded-full transition-colors relative ${isFeedbackEnabled ? 'bg-green-500' : 'bg-gray-300'}`}
-              >
-                <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${isFeedbackEnabled ? 'left-7' : 'left-1'}`}></div>
-              </button>
-            </div>
-            <button
-              onClick={() => setIsAdmin(false)}
-              className="mt-4 w-full py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-bold hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all"
-            >
-              Sair do Modo Admin
-            </button>
-          </div>
-        )}
-
-        <Testimonials allowFeedback={isFeedbackEnabled} />
+        <Testimonials allowFeedback={true} />
         <Contact />
       </main>
 
       <footer className="bg-gray-900 text-white py-12 border-t border-gray-800">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 font-bold text-xl cursor-pointer" onClick={handleAdminCheck}>
+          <div className="flex items-center gap-2 font-bold text-xl">
             <span className="text-blue-500">Developer app</span>
           </div>
           <p className="text-gray-400 text-sm">© 2024 Developer app. Todos os direitos reservados.</p>
