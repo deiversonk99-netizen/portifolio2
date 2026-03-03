@@ -14,7 +14,7 @@ function App() {
   // Hidden admin trigger: click logo 5 times or enter email in a prompt
   const handleAdminCheck = () => {
     const email = prompt("Digite seu email para acessar o painel admin:");
-    if (email === "deiverson@gmail.com") {
+    if (email === "deiversonk99@gmail.com" || email === "deiverson@gmail.com") {
       setIsAdmin(true);
       alert("Bem-vindo, Deiverson! Painel Admin Ativado.");
     } else if (email !== null) {
@@ -33,8 +33,17 @@ function App() {
 
         {/* Admin Feedback Toggle (Floating or hidden) */}
         {isAdmin && (
-          <div className="fixed bottom-4 left-4 z-[99] bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-2xl border border-blue-500 animate-in slide-in-from-bottom-10">
-            <p className="text-xs font-bold text-gray-500 uppercase mb-2">Painel Admin</p>
+          <div className="fixed bottom-4 left-4 z-[99] bg-white dark:bg-gray-900 p-4 rounded-2xl shadow-2xl border-2 border-blue-500 animate-in slide-in-from-bottom-10">
+            <div className="flex justify-between items-center mb-4">
+              <p className="text-xs font-bold text-gray-500 uppercase">Painel Admin</p>
+              <button
+                onClick={() => setIsAdmin(false)}
+                className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                title="Fechar Painel"
+              >
+                <span className="text-lg font-bold">×</span>
+              </button>
+            </div>
             <div className="flex items-center gap-3">
               <span className="text-sm font-medium">Coletar Feedbacks:</span>
               <button
@@ -44,7 +53,12 @@ function App() {
                 <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${isFeedbackEnabled ? 'left-7' : 'left-1'}`}></div>
               </button>
             </div>
-            <button onClick={() => setIsAdmin(false)} className="mt-2 text-[10px] text-gray-400 hover:text-red-500 block">Sair do Admin</button>
+            <button
+              onClick={() => setIsAdmin(false)}
+              className="mt-4 w-full py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-bold hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all"
+            >
+              Sair do Modo Admin
+            </button>
           </div>
         )}
 
