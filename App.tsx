@@ -9,17 +9,11 @@ import { Contact } from './components/Contact';
 
 function App() {
   const [isFeedbackEnabled, setIsFeedbackEnabled] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
 
-  // Hidden admin trigger: click logo 5 times or enter email in a prompt
+  // Simple toggle for the admin panel
   const handleAdminCheck = () => {
-    const email = prompt("Digite seu email para acessar o painel admin:");
-    if (email === "deiversonk99@gmail.com" || email === "deiverson@gmail.com") {
-      setIsAdmin(true);
-      alert("Bem-vindo, Deiverson! Painel Admin Ativado.");
-    } else if (email !== null) {
-      alert("Acesso negado.");
-    }
+    setIsAdmin(!isAdmin);
   };
 
   return (
