@@ -36,9 +36,10 @@ const defaultTestimonials: Testimonial[] = [
 
 interface TestimonialsProps {
   allowFeedback?: boolean;
+  isAdmin?: boolean;
 }
 
-export const Testimonials: React.FC<TestimonialsProps> = ({ allowFeedback = false }) => {
+export const Testimonials: React.FC<TestimonialsProps> = ({ allowFeedback = false, isAdmin = false }) => {
   const [list, setList] = useState<Testimonial[]>(defaultTestimonials);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,17 +49,39 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ allowFeedback = fals
 
   const fetchTestimonials = async () => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from('testimonials')
         .select('*')
         .order('created_at', { ascending: false });
 
+      const { data, error } = await query;
+
       if (error) throw error;
       if (data) {
-        setList([...defaultTestimonials, ...data]);
+        // If not admin, filter to only show approved ones (excluding default fixed ones)
+        const dbTestimonials = isAdmin
+          ? data
+          : data.filter(t => t.approved === true);
+
+        setList([...defaultTestimonials, ...dbTestimonials]);
       }
     } catch (error) {
       console.error('Error fetching testimonials:', error);
+    }
+  };
+
+  const toggleApproval = async (id: string | number, currentStatus: boolean) => {
+    try {
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ approved: !currentStatus })
+        .eq('id', id);
+
+      if (error) throw error;
+      await fetchTestimonials();
+    } catch (error) {
+      console.error('Error toggling approval:', error);
+      alert('Erro ao atualizar status. O campo "approved" pode não existir na tabela.');
     }
   };
 
@@ -113,10 +136,21 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ allowFeedback = fals
 
               <div className="flex items-center gap-4">
                 <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-white dark:ring-gray-800" />
-                <div>
+                <div className="flex-1">
                   <h4 className="font-bold text-gray-900 dark:text-white">{t.name}</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">{t.role}, {t.company}</p>
                 </div>
+                {isAdmin && typeof t.id === 'string' && (
+                  <button
+                    onClick={() => toggleApproval(t.id!, !!t.approved)}
+                    className={`px-3 py-1 rounded-full text-[10px] font-bold transition-all ${t.approved
+                        ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                        : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+                      }`}
+                  >
+                    {t.approved ? 'Visível' : 'Oculto'}
+                  </button>
+                )}
               </div>
             </div>
           ))}

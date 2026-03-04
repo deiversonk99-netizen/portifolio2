@@ -10,6 +10,7 @@ export interface Testimonial {
   content: string;
   image: string;
   rating: number;
+  approved?: boolean;
 }
 
 export interface ProblemNode {
